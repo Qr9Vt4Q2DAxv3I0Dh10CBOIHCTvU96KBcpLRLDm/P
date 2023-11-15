@@ -2,40 +2,119 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Seed.Pizza!</title>
+  <title>Seed.Pizza!/title>
   <link rel="icon" type="image/png" href="Pizza.png">
   <style>
     body {
       margin: 0;
       padding: 0;
       display: flex;
-      justify-content: center;
+      flex-direction: column;
       align-items: center;
+      justify-content: center;
       height: 100vh;
       background-color: #111111;
+      font-family: Arial, sans-serif;
+      color: #ffffff;
     }
     #spin-image {
-      width: 50%; /* Adjust width percentage as needed */
+      width: 50%; 
       height: auto;
-      max-width: 400px; /* Adjust maximum width as needed */
+      max-width: 400px; 
       transition: transform 1s ease-in-out;
-      user-drag: none; /* For Safari */
-      user-select: none; /* For most modern browsers */
-      -moz-user-select: none; /* For Firefox */
-      -webkit-user-drag: none; /* For older versions of Safari */
-      -webkit-user-select: none; /* For older versions of Chrome and Safari */
+      user-drag: none; 
+      user-select: none; 
+      -moz-user-select: none; 
+      -webkit-user-drag: none; 
+      -webkit-user-select: none; 
+      pointer-events: auto; 
+    }
+    #counter {
+      margin-top: 20px;
+      font-size: 24px;
     }
   </style>
 </head>
 <body>
-  <audio id="music" src="Pizza.mp3" autoplay loop></audio>
-  <img id="spin-image" src="Pizza.png" alt="Spinning Image" onclick="spinImage()" draggable="false">
+  <img id="spin-image" src="Img.png" alt="Spinning Image" onclick="spinAndPlayAudio()" draggable="false">
+  <div id="counter">Pizza Clicks: 0</div>
+  <audio id="music" src="Pizza.mp3" loop></audio>
   <script>
     let rotation = 0;
+    let audioPlayed = false;
+    let clickCount = 0;
+    let lastClickTime = 0;
+    const clickRateLimit = 100; 
+
+    window.onload = function() {
+      spinOnceOnLoad();
+      loadClicksFromCookie();
+      updateCounter();
+      checkPizzaImage();
+    }
+
+    function spinOnceOnLoad() {
+      const image = document.getElementById('spin-image');
+      rotation += 360;
+      image.style.transform = `rotate(${rotation}deg)`;
+    }
+
     function spinImage() {
       const image = document.getElementById('spin-image');
       rotation += 360;
       image.style.transform = `rotate(${rotation}deg)`;
+    }
+
+    function playAudio() {
+      const audio = document.getElementById('music');
+      audio.play();
+    }
+
+    function spinAndPlayAudio() {
+      const currentTime = new Date().getTime();
+      if (currentTime - lastClickTime < clickRateLimit) {
+        return; 
+      }
+      lastClickTime = currentTime;
+
+      if (!audioPlayed) {
+        playAudio();
+        audioPlayed = true;
+      }
+      spinImage();
+      clickCount++;
+      updateCounter();
+      checkPizzaImage();
+      saveClicksToCookie();
+    }
+
+    function updateCounter() {
+      const counter = document.getElementById('counter');
+      counter.textContent = `Pizza Clicks: ${clickCount}`;
+    }
+
+    function checkPizzaImage() {
+      const image = document.getElementById('spin-image');
+      if (clickCount >= 1000 && clickCount < 100000) {
+        image.src = 'Pizza2.png';
+      } else if (clickCount >= 100000) {
+        image.src = 'Pizza3.png';
+      }
+    }
+
+    function saveClicksToCookie() {
+      document.cookie = `clickCount=${clickCount}`;
+    }
+
+    function loadClicksFromCookie() {
+      const cookies = document.cookie.split('; ');
+      for (let cookie of cookies) {
+        const [name, value] = cookie.split('=');
+        if (name === 'clickCount') {
+          clickCount = parseInt(value) || 0;
+          break;
+        }
+      }
     }
   </script>
 </body>
