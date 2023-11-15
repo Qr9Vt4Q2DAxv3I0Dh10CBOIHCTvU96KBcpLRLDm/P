@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Seed.Pizza!</title>
+  <link rel="icon" type="image/png" href="Pizza.png">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: #111111;
+    }
+    #spin-image {
+      width: 50%; /* Adjust width percentage as needed */
+      height: auto;
+      max-width: 400px; /* Adjust maximum width as needed */
+      transition: transform 1s ease-in-out;
+      user-drag: none; /* For Safari */
+      user-select: none; /* For most modern browsers */
+      -moz-user-select: none; /* For Firefox */
+      -webkit-user-drag: none; /* For older versions of Safari */
+      -webkit-user-select: none; /* For older versions of Chrome and Safari */
+    }
+  </style>
+</head>
+<body>
+  <audio id="music" src="Pizza.mp3" autoplay loop></audio>
+  <img id="spin-image" src="Pizza.png" alt="Spinning Image" onclick="spinImage()" draggable="false">
+  <script>
+    let rotation = 0;
+    function spinImage() {
+      const image = document.getElementById('spin-image');
+      rotation += 360;
+      image.style.transform = `rotate(${rotation}deg)`;
+    }
+  </script>
+</body>
+</html>
