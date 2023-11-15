@@ -51,10 +51,16 @@
 </head>
 <body>
   <div class="container">
-    <img src="Slice.png" alt="The missing slice!">
+    <img src="Slice.png" alt="The missing slice!" id="sliceImage">
     <h1>404 - Slice Not Found!</h1>
     <p>It appears your slice may have been misplaced!</p>
     <p><a href="https://www.seed.pizza">Go back to the party!</a></p>
   </div>
+
+  <script>
+    document.getElementById('sliceImage').addEventListener('dragstart', function(event) {
+      event.preventDefault();
+    });
+  </script>
 </body>
 </html>
