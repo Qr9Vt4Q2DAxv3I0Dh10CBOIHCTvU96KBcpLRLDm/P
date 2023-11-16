@@ -37,12 +37,12 @@
 </head>
 <body>
   <img id="spin-image" src="Pizza.png" alt="Pizza" onclick="spinAndPlayAudio()" draggable="false">
-  <div id="counter">Pizza Clicks: 0</div>
+  <div id="counter">Pizzas: 0</div>
   <audio id="music" src="Pizza.mp3" loop></audio>
   <script>
     let rotation = 0;
     let audioPlayed = false;
-    let clickCount = 0;
+    let Pizzas = 0;
     let lastClickTime = 0;
     const clickRateLimit = 100; 
 
@@ -82,7 +82,7 @@
         audioPlayed = true;
       }
       spinImage();
-      clickCount++;
+      Pizzas++;
       updateCounter();
       checkPizzaImage();
       saveClicksToCookie();
@@ -90,28 +90,28 @@
 
     function updateCounter() {
       const counter = document.getElementById('counter');
-      counter.textContent = `Pizza Clicks: ${clickCount}`;
+      counter.textContent = `Pizza Clicks: ${Pizzas}`;
     }
 
     function checkPizzaImage() {
       const image = document.getElementById('spin-image');
-      if (clickCount >= 1000 && clickCount < 100000) {
+      if (Pizzas >= 1000 && Pizzas < 100000) {
         image.src = 'Pizza2.png';
-      } else if (clickCount >= 100000) {
+      } else if (Pizzas >= 100000) {
         image.src = 'Pizza3.png';
       }
     }
 
     function saveClicksToCookie() {
-      document.cookie = `clickCount=${clickCount}`;
+      document.cookie = `Pizzas=${Pizzas}`;
     }
 
     function loadClicksFromCookie() {
       const cookies = document.cookie.split('; ');
       for (let cookie of cookies) {
         const [name, value] = cookie.split('=');
-        if (name === 'clickCount') {
-          clickCount = parseInt(value) || 0;
+        if (name === 'Pizzas') {
+          Pizzas = parseInt(value) || 0;
           break;
         }
       }
