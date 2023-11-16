@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Seed.Pizza!</title>
-  <link rel="icon" type="image/png" href="Pizza.png">
+  <title>America</title>
+  <link rel="icon" type="image/png" href="America.png">
   <style>
     body {
       margin: 0;
@@ -36,13 +36,13 @@
   </style>
 </head>
 <body>
-  <img id="spin-image" src="Pizza.png" alt="Pizza" onclick="spinAndPlayAudio()" draggable="false">
-  <div id="counter">Pizza Clicks: 0</div>
-  <audio id="music" src="Pizza.mp3" loop></audio>
+  <img id="spin-image" src="America.png" alt="Gun" onclick="spinAndPlayAudio()" draggable="false">
+  <div id="counter">Guns: 0</div>
+  <audio id="music" src="America.mp3" loop></audio>
   <script>
     let rotation = 0;
     let audioPlayed = false;
-    let clickCount = 0;
+    let Guns = 0;
     let lastClickTime = 0;
     const clickRateLimit = 100; 
 
@@ -82,7 +82,7 @@
         audioPlayed = true;
       }
       spinImage();
-      clickCount++;
+      Guns++;
       updateCounter();
       checkPizzaImage();
       saveClicksToCookie();
@@ -90,28 +90,28 @@
 
     function updateCounter() {
       const counter = document.getElementById('counter');
-      counter.textContent = `Pizza Clicks: ${clickCount}`;
+      counter.textContent = `Guns: ${Guns}`;
     }
 
     function checkPizzaImage() {
       const image = document.getElementById('spin-image');
-      if (clickCount >= 1000 && clickCount < 100000) {
-        image.src = 'Pizza2.png';
-      } else if (clickCount >= 100000) {
-        image.src = 'Pizza3.png';
+      if (Guns >= 1000 && Guns < 100000) {
+        image.src = 'America2.png';
+      } else if (Guns >= 100000) {
+        image.src = 'America3.png';
       }
     }
 
     function saveClicksToCookie() {
-      document.cookie = `clickCount=${clickCount}`;
+      document.cookie = `Guns=${Guns}`;
     }
 
     function loadClicksFromCookie() {
       const cookies = document.cookie.split('; ');
       for (let cookie of cookies) {
         const [name, value] = cookie.split('=');
-        if (name === 'clickCount') {
-          clickCount = parseInt(value) || 0;
+        if (name === 'Guns') {
+          Guns = parseInt(value) || 0;
           break;
         }
       }
