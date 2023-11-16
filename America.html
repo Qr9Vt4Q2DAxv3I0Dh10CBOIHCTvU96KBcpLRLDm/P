@@ -33,11 +33,18 @@
       margin-top: 20px;
       font-size: 24px;
     }
+    #back-to-italy {
+      margin-top: 20px;
+      font-size: 14px;
+    }
   </style>
 </head>
 <body>
   <img id="spin-image" src="America.png" alt="Gun" onclick="spinAndPlayAudio()" draggable="false">
   <div id="counter">Guns: 0</div>
+  <div id="back-to-italy">
+    <a href="https://www.seed.pizza">Back to Italy</a>
+  </div>
   <audio id="music" src="America.mp3" loop></audio>
   <script>
     let rotation = 0;
@@ -97,8 +104,10 @@
       const image = document.getElementById('spin-image');
       if (Guns >= 1000 && Guns < 100000) {
         image.src = 'America2.png';
-      } else if (Guns >= 100000) {
+      } else if (Guns >= 100000 && Guns < 340000000) {
         image.src = 'America3.png';
+      } else if (Guns >= 340000000) {
+        image.src = 'America4.png';
       }
     }
 
