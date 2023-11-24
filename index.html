@@ -95,10 +95,18 @@
 
     function checkPizzaImage() {
       const image = document.getElementById('spin-image');
-      if (Pizzas >= 1000 && Pizzas < 100000) {
-        image.src = 'Pizza2.png';
+      if (Pizzas >= 100000000) {
+        image.src = '100000000.png';
+      } else if (Pizzas >= 10000000) {
+        image.src = '10000000.png';
+      } else if (Pizzas >= 1000000) {
+        image.src = '1000000.png';
       } else if (Pizzas >= 100000) {
-        image.src = 'Pizza3.png';
+        image.src = '100000.png';
+      } else if (Pizzas >= 10000) {
+        image.src = '10000.png';
+      } else if (Pizzas >= 1000) {
+        image.src = '1000.png';
       }
     }
 
